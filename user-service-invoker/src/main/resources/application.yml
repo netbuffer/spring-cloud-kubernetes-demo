@@ -1,0 +1,35 @@
+server:
+  port: 8701
+
+spring:
+  application:
+    name: user-service-invoker
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+        cache-loading-timeout-seconds: 60
+        enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
+      user-service-provider:
+        loggerLevel: full
+
+logging:
+  config: classpath:logback-springboot.xml
+
+print-server-address:
+  ignore-parent-context: true
+
+info:
+  app: ${spring.application.name}

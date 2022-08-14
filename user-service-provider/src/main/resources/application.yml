@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: user-service-provider
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+        cache-loading-timeout-seconds: 60
+        enabled: true
+
+server:
+  port: 8700
+
+logging:
+  config: classpath:logback-springboot.xml
+
+print-server-address:
+  ignore-parent-context: true
+
+info:
+  tags:
+    environment: test
+  app: ${spring.application.name}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
