@@ -1,7 +1,11 @@
 spring:
   application:
-    name: user-service-provider
+    # use k8s service name
+    name: sckd-user-service-provider
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
     kubernetes:
       discovery:
         all-namespaces: true

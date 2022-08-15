@@ -14,25 +14,26 @@ public class UserService {
 
     @Resource
     private RestTemplate restTemplate;
+    public static final String SERVICE_NAME = "sckd-user-service-provider";
 
     public String getUser(Long id) {
-        String r = restTemplate.getForObject("http://user-service-provider/user/" + id, String.class);
+        String r = restTemplate.getForObject("http://" + SERVICE_NAME + "/user/" + id, String.class);
         log.info("after getUser {},result:{}", id, r);
         return r;
     }
 
     public String getUserRandomSleep(Long id) {
-        int sleep = RandomUtils.nextInt(1,6);
+        int sleep = RandomUtils.nextInt(1, 6);
         log.info("invoke getUser {},sleep {} s", id, sleep);
-        String r = restTemplate.getForObject("http://user-service-provider/user/" + id + "?s={1}", String.class, sleep);
+        String r = restTemplate.getForObject("http://" + SERVICE_NAME + "/user/" + id + "?s={1}", String.class, sleep);
         log.info("after getUser {},result:{}", id, r);
         return r;
     }
 
     public String getUserWithSeparateThreadPool(Long id) {
-        int sleep = RandomUtils.nextInt(1,6);
+        int sleep = RandomUtils.nextInt(1, 6);
         log.info("invoke getUser {},sleep {} s", id, sleep);
-        String r = restTemplate.getForObject("http://user-service-provider/user/" + id + "?s={1}", String.class, sleep);
+        String r = restTemplate.getForObject("http://" + SERVICE_NAME + "/user/" + id + "?s={1}", String.class, sleep);
         log.info("after getUser {},result:{}", id, r);
         return r;
     }

@@ -30,7 +30,7 @@ public class UserController {
     public String getUser(@PathVariable("id") Long id, Integer s) {
         log.info("invoke get user {},sleep {} s", id, s);
         if (s == null) {
-            return restTemplate.getForObject("http://user-service-provider/user/" + id, String.class);
+            return restTemplate.getForObject("http://" + UserService.SERVICE_NAME + "/user/" + id, String.class);
         } else {
             try {
                 TimeUnit.SECONDS.sleep(s);

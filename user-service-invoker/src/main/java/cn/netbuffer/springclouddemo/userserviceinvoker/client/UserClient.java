@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * fallback参数
  */
-@FeignClient(value = "user-service-provider", fallback = UserClient.UserClientFallback.class)
+@FeignClient(value = "sckd-user-service-provider", fallback = UserClient.UserClientFallback.class)
 public interface UserClient {
 
     Map nullUser = ImmutableMap.of("id", -1);

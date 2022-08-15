@@ -3,11 +3,15 @@ server:
 
 spring:
   application:
-    name: user-service-invoker
+    name: sckd-user-service-invoker
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
     kubernetes:
       discovery:
         all-namespaces: true
+        # second
         cache-loading-timeout-seconds: 60
         enabled: true
 
