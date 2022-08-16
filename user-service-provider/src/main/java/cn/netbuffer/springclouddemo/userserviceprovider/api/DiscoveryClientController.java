@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.List;
 
 @Slf4j
@@ -36,6 +38,11 @@ public class DiscoveryClientController {
     @GetMapping("discoveryclient")
     public DiscoveryClient getDiscoveryClient() {
         return discoveryClient;
+    }
+
+    @GetMapping("getHostAddress")
+    public String getHostAddress() throws UnknownHostException {
+        return Inet4Address.getLocalHost().getHostAddress();
     }
 
     @GetMapping("instances/{serviceId}")

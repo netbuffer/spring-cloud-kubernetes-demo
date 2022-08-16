@@ -15,10 +15,12 @@
 * curl http://localhost:8700/discoveryclient/instances/{service}
 * curl k8s-node-ip:30101/invoke/user/1
 * curl k8s-node-ip:30102/discoveryclient/getServices
+* curl k8s-node-ip:30102/discoveryclient/getHostAddress
 * kubectl apply -f sckd.yaml (for run on k8s)
 * kubectl delete -f sckd.yaml
 * kubectl get all -n default -o wide
 * kubectl logs -f -n default xxx
+* kubectl scale deployment spring-cloud-kubernetes-demo --replicas=3 -n default
 
 ### Docker Image
 * docker build -f user-service-provider/Dockerfile -t javawiki/sckd-user-service-provider:v0.0.1-SNAPSHOT user-service-provider/
