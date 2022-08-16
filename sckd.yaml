@@ -20,24 +20,29 @@ subjects:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sckd-user-service-invoker
+  name: spring-cloud-kubernetes-demo
   namespace: default
 spec:
   revisionHistoryLimit: 3
   replicas: 1
   selector:
     matchLabels:
-      app: sckd-user-service-invoker
+      app: spring-cloud-kubernetes-demo
   template:
     metadata:
       labels:
-        app: sckd-user-service-invoker
+        app: spring-cloud-kubernetes-demo
     spec:
       serviceAccountName: k8s-admin
       containers:
-        - name: user-service-invoker
-          image: javawiki/sckd-user-service-invoker:v0.0.1-SNAPSHOT
-          imagePullPolicy: Never
+        - name: spring-cloud-kubernetes-demo
+          image: javawiki/spring-cloud-kubernetes-demo:v1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8701
+              name: http-usi
+            - containerPort: 8700
+              name: http-usp
 ---
 apiVersion: v1
 kind: Service
@@ -46,7 +51,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: sckd-user-service-invoker
+    app: spring-cloud-kubernetes-demo
   ports:
     - protocol: TCP
       name: http
@@ -55,28 +60,6 @@ spec:
       targetPort: 8701
   type: NodePort
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sckd-user-service-provider
-  namespace: default
-spec:
-  revisionHistoryLimit: 3
-  replicas: 1
-  selector:
-    matchLabels:
-      app: sckd-user-service-provider
-  template:
-    metadata:
-      labels:
-        app: sckd-user-service-provider
-    spec:
-      serviceAccountName: k8s-admin
-      containers:
-        - name: user-service-provider
-          image: javawiki/sckd-user-service-provider:v0.0.1-SNAPSHOT
-          imagePullPolicy: Never
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -84,7 +67,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: sckd-user-service-provider
+    app: spring-cloud-kubernetes-demo
   ports:
     - protocol: TCP
       name: http

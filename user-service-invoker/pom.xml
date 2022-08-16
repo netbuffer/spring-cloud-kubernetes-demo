@@ -64,32 +64,6 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.40.1</version>
-                <configuration>
-                    <dockerHost>tcp://127.0.0.1:2375</dockerHost>
-                    <pullRegistry>registry.hub.docker.com/library</pullRegistry>
-                    <imagePullPolicy>IfNotPresent</imagePullPolicy>
-                    <images>
-                        <image>
-                            <name>javawiki/sckd-${project.name}:v${project.version}</name>
-                            <build>
-                                <dockerFileDir>${project.basedir}</dockerFileDir>
-                            </build>
-                        </image>
-                    </images>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>docker-build</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
