@@ -38,6 +38,9 @@ spec:
         - name: spring-cloud-kubernetes-demo
           image: javawiki/spring-cloud-kubernetes-demo:v1.0.0
           imagePullPolicy: IfNotPresent
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: test
           ports:
             - containerPort: 8701
               name: http-usi
@@ -75,4 +78,21 @@ spec:
       port: 8700
       targetPort: 8700
   type: NodePort
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sckd-user-service-provider
+  namespace: default
+data:
+  application.yaml: |-
+    usp:
+      desc: about user-service-provider service
+    ---
+    spring:
+      profiles: test
+    greeting:
+      message: 1
+    ---
+  single-key: single value
 ---

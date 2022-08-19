@@ -1,24 +1,29 @@
 package cn.netbuffer.springclouddemo.userserviceprovider.api;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.List;
 
 @Slf4j
+@RefreshScope
 @RestController
 @RequestMapping("/discoveryclient")
 public class DiscoveryClientController {
 
     @Resource
     private DiscoveryClient discoveryClient;
+    @Resource
+    private Environment environment;
+    @Value("${usp.desc}")
+    private String uspDesc;
 
     @GetMapping("getOrder")
     public int getOrder() {
@@ -54,4 +59,20 @@ public class DiscoveryClientController {
         }
         return instances;
     }
+
+    @GetMapping("getActiveProfiles")
+    public String[] getActiveProfiles() {
+        return environment.getActiveProfiles();
+    }
+
+    @GetMapping("getenv")
+    public String getEnv(@RequestParam(required = false, defaultValue = "usp.desc") String key) {
+        return environment.getProperty(key);
+    }
+
+    @GetMapping("getuspdesc")
+    public String uspDesc() {
+        return uspDesc;
+    }
+
 }
