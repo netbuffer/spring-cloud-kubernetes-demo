@@ -1,32 +1,3 @@
-spring:
-  application:
-    # use k8s service name
-    name: sckd-user-service-provider
-  cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
-    kubernetes:
-      loadbalancer:
-        mode: SERVICE
-      reload:
-        enabled: true
-        strategy: refresh
-        mode: polling
-        # verifying changes period second
-        period: 10s
-        namespaces:
-          - default
-      config:
-        enabled: true
-        fail-fast: true
-        include-profile-specific-sources: true
-        namespace: default
-      discovery:
-        all-namespaces: true
-        cache-loading-timeout-seconds: 60
-        enabled: true
-
 server:
   port: 8700
 
@@ -42,6 +13,13 @@ info:
   app: ${spring.application.name}
 
 management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
   endpoints:
     web:
       exposure:

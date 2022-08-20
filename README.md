@@ -9,8 +9,11 @@
 
 ### help
 * https://docs.spring.io/spring-cloud/docs/current/reference/html/
+* https://docs.spring.io/spring-cloud-kubernetes/docs/2.1.3/reference/html/
 * https://github.com/wujiuye/share-projects/blob/main/sck-demo
 * https://github.com/spring-cloud/spring-cloud-kubernetes
+* https://github.com/spring-cloud/spring-cloud-kubernetes/tree/main/spring-cloud-kubernetes-examples
+* https://stackoverflow.com/questions/62720167/spring-cloud-kubernetes-not-reloading-secret-change
 * curl http://localhost:8700/discoveryclient/getServices
 * curl http://localhost:8700/discoveryclient/instances/{service}
 * curl k8s-node-ip:30101/invoke/user/1
@@ -19,6 +22,8 @@
 * curl k8s-node-ip:30102/discoveryclient/getenv?key=usp.desc
 * curl k8s-node-ip:30102/discoveryclient/getenv?key=greeting.message
 * curl k8s-node-ip:30102/discoveryclient/getenv?key=single-key
+* curl k8s-node-ip:30102/user/desc
+* watch -n 3 "curl k8s-node-ip:30102/user/desc" (observe changes in linux every 3 second)
 * kubectl apply -f sckd.yaml (for run on k8s)
 * kubectl delete -f sckd.yaml
 * kubectl get all -n default -o wide

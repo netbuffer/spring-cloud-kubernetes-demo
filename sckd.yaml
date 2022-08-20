@@ -41,6 +41,8 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: test
+            - name: TZ
+              value: Asia/Shanghai
           ports:
             - containerPort: 8701
               name: http-usi
@@ -87,12 +89,12 @@ metadata:
 data:
   application.yaml: |-
     usp:
-      desc: about user-service-provider service
+      desc: some about sckd-user-service-provider
     ---
     spring:
       profiles: test
     greeting:
-      message: 1
+      message: hello world
     ---
   single-key: single value
 ---

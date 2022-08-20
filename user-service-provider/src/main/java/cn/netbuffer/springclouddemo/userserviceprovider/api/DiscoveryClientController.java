@@ -22,8 +22,10 @@ public class DiscoveryClientController {
     private DiscoveryClient discoveryClient;
     @Resource
     private Environment environment;
-    @Value("${usp.desc}")
+    @Value("${usp.desc:null}")
     private String uspDesc;
+    @Value("${greeting.message:null}")
+    private String greetingMessage;
 
     @GetMapping("getOrder")
     public int getOrder() {
@@ -73,6 +75,11 @@ public class DiscoveryClientController {
     @GetMapping("getuspdesc")
     public String uspDesc() {
         return uspDesc;
+    }
+
+    @GetMapping("greetingMessage")
+    public String greetingMessage() {
+        return greetingMessage;
     }
 
 }

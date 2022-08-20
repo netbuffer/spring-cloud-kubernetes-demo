@@ -1,7 +1,9 @@
 package cn.netbuffer.springclouddemo.userserviceprovider.api;
 
+import cn.netbuffer.springclouddemo.userserviceprovider.config.UspConfig;
 import cn.netbuffer.springclouddemo.userserviceprovider.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,15 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
+@RefreshScope
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private UspConfig uspConfig;
 
     @RequestMapping(value = "retry-test")
     public ResponseEntity retryTest(HttpServletRequest httpServletRequest, @RequestParam(value = "code", defaultValue = "200") Integer code) {
@@ -75,6 +80,11 @@ public class UserController {
             headers.put(key, httpServletRequest.getHeader(key));
         }
         return headers;
+    }
+
+    @GetMapping("desc")
+    public String desc() {
+        return uspConfig.getDesc();
     }
 
 }
